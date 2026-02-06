@@ -105,7 +105,7 @@ async function cargarProductosFiltrados(categoria) {
     const container = document.getElementById("productos-container");
     if (!container) return;
     try {
-        const res = await fetch('../fronted/json/productos.json');
+        const res = await fetch('fronted/json/productos.json');
         const data = await res.json();
         let productosAMostrar = categoria 
             ? data.productos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase())
@@ -191,6 +191,7 @@ async function ejecutarBusquedaSeparada(termino) {
     }
 
 }
+
 
 
 
