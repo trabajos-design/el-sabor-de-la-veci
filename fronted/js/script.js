@@ -105,7 +105,7 @@ async function cargarProductosFiltrados(categoria) {
     const container = document.getElementById("productos-container");
     if (!container) return;
     try {
-        const res = await fetch('../fronted/json/productos.json');
+        const res = await fetch('fronted/json/productos.json');
         const data = await res.json();
         let productosAMostrar = categoria 
             ? data.productos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase())
@@ -118,22 +118,11 @@ async function cargarPromociones() {
     const container = document.getElementById("promociones-container");
     if (!container) return;
     try {
-        // Ajustamos la ruta para que funcione en la raíz de GitHub
-        const res = await fetch('json/productos.json'); 
+        const res = await fetch('fronted/json/productos.json');
         const data = await res.json();
-        
-        // Filtramos solo los que tienen enPromocion: true
         const soloPromos = data.productos.filter(p => p.enPromocion === true);
-        
-        if (soloPromos.length > 0) {
-            renderizarCards(soloPromos, container);
-        } else {
-            container.innerHTML = "<p>Próximamente nuevas promociones...</p>";
-        }
-    } catch (e) { 
-        console.error("Error al cargar promos:", e);
-        container.innerHTML = "<h2>Error al conectar con la cocina.</h2>"; 
-    }
+        renderizarCards(soloPromos, container);
+    } catch (e) { console.error("Error al cargar promos:", e); }
 }
 
 function confirmarPedido(id, precio) {
@@ -202,3 +191,4 @@ async function ejecutarBusquedaSeparada(termino) {
     }
 
 }
+
