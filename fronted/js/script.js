@@ -118,11 +118,22 @@ async function cargarPromociones() {
     const container = document.getElementById("promociones-container");
     if (!container) return;
     try {
-        const res = await fetch('../fronted/json/productos.json');
+        // Ajustamos la ruta para que funcione en la raíz de GitHub
+        const res = await fetch('json/productos.json'); 
         const data = await res.json();
+        
+        // Filtramos solo los que tienen enPromocion: true
         const soloPromos = data.productos.filter(p => p.enPromocion === true);
-        renderizarCards(soloPromos, container);
-    } catch (e) { console.error("Error al cargar promos:", e); }
+        
+        if (soloPromos.length > 0) {
+            renderizarCards(soloPromos, container);
+        } else {
+            container.innerHTML = "<p>Próximamente nuevas promociones...</p>";
+        }
+    } catch (e) { 
+        console.error("Error al cargar promos:", e);
+        container.innerHTML = "<h2>Error al conectar con la cocina.</h2>"; 
+    }
 }
 
 function confirmarPedido(id, precio) {
@@ -189,4 +200,5 @@ async function ejecutarBusquedaSeparada(termino) {
     } catch (error) {
         console.error("Error en la búsqueda:", error);
     }
+
 }
