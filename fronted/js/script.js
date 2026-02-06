@@ -118,7 +118,7 @@ async function cargarPromociones() {
     const container = document.getElementById("promociones-container");
     if (!container) return;
     try {
-        const res = await fetch('../fronted/json/productos.json');
+        const res = await fetch('fronted/json/productos.json');
         const data = await res.json();
         const soloPromos = data.productos.filter(p => p.enPromocion === true);
         renderizarCards(soloPromos, container);
@@ -191,5 +191,6 @@ async function ejecutarBusquedaSeparada(termino) {
     }
 
 }
+
 
 
