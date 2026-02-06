@@ -1,0 +1,504 @@
+
+:root {
+    --veci-orange: rgba(231, 84, 25, 0.87);
+    --dark-grey: #202124;
+}
+
+body {
+    font-family: 'Oswald', sans-serif; /* Sugiero una fuente fuerte */
+    margin: 0;
+    background-color: #fff;
+}
+/* --- AJUSTES PARA CELULAR (RESPONSIVE) --- */
+@media (max-width: 768px) {
+    /* Navbar: Los elementos se apilan verticalmente */
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 2%;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 0;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    /* Hero: El texto se ajusta y la imagen baja */
+    .hero {
+        height: auto;
+        min-height: 500px;
+        flex-direction: column-reverse; /* Imagen arriba, texto abajo */
+        padding: 40px 5%;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 50px; /* Tamaño reducido para que no se corte el texto */
+        line-height: 1;
+    }
+
+    .hero-image img {
+        width: 100%;
+        max-width: 280px; /* Tamaño controlado para móviles */
+        height: auto;
+    }
+
+    /* Grid de Productos: Asegura que no salgan tarjetas gigantes */
+    .grid-productos {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 15px;
+        padding: 10px;
+    }
+
+    /* Historia/Nosotros: De 2 columnas a 1 sola */
+    .historia-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .foto-duena {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Mapa: Se ajusta al ancho de la pantalla */
+    .mapa-contenedor {
+        height: 300px; /* Menos alto en celular para facilitar el scroll */
+    }
+
+    /* Ajuste de botones para dedos (táctil) */
+    .btn-menu, .btn-ingresar, .btn-pedir {
+        width: 100%; /* Botones a lo ancho en móvil */
+        box-sizing: border-box;
+    }
+}
+
+/* Evitar desbordamiento horizontal general */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo { font-weight: 900; font-size: 22px; color: var(--veci-orange); }
+.logo span { color: black; }
+
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { text-decoration: none; color: black; font-weight: bold; text-transform: uppercase; }
+
+.btn-ingresar {
+    background: black;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Hero Section al estilo KFC */
+.hero {
+    background-color: var(--veci-orange);
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+    padding: 0 5%;
+}
+
+.hero-content h1 {
+    font-size: 90px;
+    line-height: 0.8;
+    margin: 0;
+    font-weight: 900;
+}
+
+.btn-menu {
+    background: transparent;
+    border: 3px solid white;
+    color: white;
+    padding: 15px 45px;
+    border-radius: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+
+.btn-menu:hover { background: white; color: var(--veci-orange); }
+
+/* Grid de Productos */
+.container { padding: 50px 8%; }
+.section-title { text-align: center; font-size: 32px; text-transform: uppercase; margin-bottom: 30px; }
+
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid #eee;
+}
+
+.card:hover { transform: translateY(-10px); }
+.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+
+.card h3 { margin: 15px 0 5px; color: var(--dark-grey); }
+.card .precio { color: var(--veci-orange); font-size: 24px; font-weight: bold; }
+
+.input-cantidad {
+    width: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+/* Contenedor principal del mapa */
+.map-full-width {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.mapa-contenedor {
+    width: 100%;
+    height: 450px; /* Puedes subirlo a 500px si lo quieres más alto */
+    overflow: hidden;
+}
+
+/* El iframe debe ocupar el 100% de su padre */
+.mapa-contenedor iframe {
+    width: 100%;
+    height: 100%;
+    filter: grayscale(0.2); /* Opcional: le da un toque elegante */
+    border-top: 5px solid rgba(231, 84, 25, 0.87); /* Línea naranja superior */
+}
+
+/* Estilos para las redes sociales abajo del mapa */
+.socials-container {
+    background-color: #202124;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.social-icons {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+/* Logo en el Nav */
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-img { height: 50px; width: auto; border-radius: 50%; }
+
+/* Estilos extra para las categorías */
+.grid-categorias {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.categoria-card {
+    position: relative; /* Para el badge */
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: 0.4s all ease;
+}
+
+.categoria-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(231, 84, 25, 0.2);
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--veci-orange);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.categoria-card img {
+    height: 250px; /* Un poco más altas */
+    transition: 0.5s;
+}
+
+.categoria-card:hover img {
+    transform: scale(1.1);
+}
+
+.categoria-card img { width: 100%; height: 200px; object-fit: cover; }
+.categoria-card h3 { padding: 15px; background: rgba(231, 84, 25, 0.87); color: white; margin: 0; }
+/* En style.css para que el logo no se vea extraño */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 60px; /* Tamaño ideal */
+    width: 60px;
+    border-radius: 50%; /* Lo mantiene circular */
+    border: 2px solid rgba(231, 84, 25, 0.87); /* Borde naranja de marca */
+    object-fit: cover;
+}
+
+.logo span {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #202124;
+}
+.category-hero {
+    height: 300px;
+    background-color: rgba(231, 84, 25, 0.87); /* Color de respaldo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.banner-content h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin: 0;
+}
+
+.btn-pedir {
+    background-color: rgba(231, 84, 25, 0.87);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-pedir:hover {
+    background-color: #000;
+}
+/* Contenedor de la cuadrícula de productos */
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px)); /* Máximo 300px por tarjeta */
+    gap: 20px;
+    justify-content: center; /* Centra las tarjetas si hay pocas */
+    padding: 20px;
+}
+
+/* Tarjeta de Producto Individual */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    border: 1px solid #eee;
+    height: 100%; /* Para que todas midan lo mismo */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Imagen del Producto - Aquí controlamos el tamaño gigante */
+.card img {
+    width: 100%;
+    height: 180px; /* Altura fija para la imagen */
+    object-fit: cover; /* Recorta la imagen para que rellene el espacio sin deformarse */
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Contenido de texto de la tarjeta */
+.card h3 {
+    font-size: 1.2rem;
+    margin: 15px 10px 5px;
+    color: var(--dark-grey);
+    text-transform: uppercase;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #666;
+    padding: 0 10px;
+    flex-grow: 1; /* Empuja el precio y botón hacia abajo */
+}
+
+.precio {
+    font-weight: bold;
+    color: var(--veci-orange);
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+/* Caja de controles (Input y Botón) */
+.order-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #f9f9f9;
+}
+
+.input-cantidad {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+/* Banner reducido */
+.category-hero-small {
+    height: 180px; /* Mucho más bajo que el anterior */
+    background-color: var(--veci-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.category-hero-small h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Barra de navegación secundaria */
+.nav-secundario {
+    display: flex;
+    align-items: center;
+    padding: 15px 8%;
+    background: #f4f4f4;
+    gap: 15px;
+}
+
+.btn-volver {
+    background: transparent;
+    border: 2px solid var(--veci-orange);
+    color: var(--veci-orange);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-volver:hover {
+    background: var(--veci-orange);
+    color: white;
+}
+
+.separador { color: #ccc; }
+
+/* Controlar tamaño de tarjetas de productos para que no sean gigantes */
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 280px)); /* Tamaño controlado */
+    gap: 20px;
+    justify-content: center;
+}
+/* Estilos para la página Nosotros */
+.historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.foto-duena-container {
+    text-align: center;
+}
+
+.foto-duena {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 20px;
+    border: 8px solid var(--veci-orange);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.caption-duena {
+    margin-top: 15px;
+    font-style: italic;
+    color: var(--veci-orange);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.hitos {
+    border-left: 3px solid var(--veci-orange);
+    padding-left: 30px;
+}
+
+.hito, .hito-final {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.hito h3, .hito-final h3 {
+    color: var(--dark-grey);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hito h3 i {
+    color: var(--veci-orange);
+}
+
+/* Punto decorativo en la línea de tiempo */
+.hito::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: var(--veci-orange);
+    border-radius: 50%;
+}
+
+/* Responsivo para celulares */
+@media (max-width: 768px) {
+    .historia-grid {
+        grid-template-columns: 1fr;
+    }
+}

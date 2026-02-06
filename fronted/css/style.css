@@ -1,0 +1,596 @@
+:root {
+    --veci-orange: rgba(231, 84, 25, 0.87);
+    --dark-grey: #202124;
+}
+
+/* --- ADAPTABILIDAD PARA CELULARES (RESPONSIVE) --- */
+@media (max-width: 768px) {
+    /* 1. Navbar y Logo: Apilamos los elementos verticalmente */
+    .navbar {
+        flex-direction: column;
+        padding: 15px 2%;
+        gap: 15px;
+    }
+
+    .nav-links {
+        gap: 12px;
+        flex-wrap: wrap; /* Permite que los links bajen si no caben */
+        justify-content: center;
+        font-size: 13px;
+    }
+
+    .nav-icons {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        width: 90% !important; /* El buscador ocupa casi todo el ancho en móvil */
+    }
+
+    /* 2. Hero Section: Ajustamos el tamaño gigante del texto */
+    .hero {
+        height: auto;
+        min-height: 400px;
+        padding: 40px 5%;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 45px; /* Reducimos los 90px originales para que no se corte */
+        line-height: 1.1;
+    }
+
+    .btn-menu {
+        padding: 12px 30px;
+        font-size: 18px;
+    }
+
+    /* 3. Grid de Productos: Forzamos 1 o 2 columnas según el espacio */
+    .grid-productos {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .card {
+        max-width: 100%; /* Permitimos que ocupe su celda asignada */
+    }
+
+    .card img {
+        height: 150px; /* Imagen un poco más pequeña en móvil */
+    }
+
+    .card h3 {
+        font-size: 1rem;
+    }
+
+    /* 4. Mapa y Footer: Maximizamos el espacio */
+    .mapa-contenedor {
+        height: 300px; /* Altura más cómoda para deslizar el dedo */
+    }
+
+    .banner-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Evitar scroll horizontal accidental */
+html, body {
+    overflow-x: hidden;
+    position: relative;
+}
+/* ----------------------------------------- */
+
+
+body {
+    font-family: 'Oswald', sans-serif; /* Sugiero una fuente fuerte */
+    margin: 0;
+    background-color: #fff;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo { font-weight: 900; font-size: 22px; color: var(--veci-orange); }
+.logo span { color: black; }
+
+.nav-links { list-style: none; display: flex; gap: 20px; }
+.nav-links a { text-decoration: none; color: black; font-weight: bold; text-transform: uppercase; }
+
+.btn-ingresar {
+    background: black;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Hero Section al estilo KFC */
+.hero {
+    background-color: var(--veci-orange);
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+    padding: 0 5%;
+}
+
+.hero-content h1 {
+    font-size: 90px;
+    line-height: 0.8;
+    margin: 0;
+    font-weight: 900;
+}
+
+.btn-menu {
+    background: transparent;
+    border: 3px solid white;
+    color: white;
+    padding: 15px 45px;
+    border-radius: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s;
+}
+
+.btn-menu:hover { background: white; color: var(--veci-orange); }
+ /* buscar barra */
+/* Busca esta clase en tu CSS o agrégala */
+.nav-icons {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el buscador y el botón */
+    justify-content: flex-end; /* Los mantiene a la derecha */
+    gap: 15px; /* Espacio uniforme entre ellos */
+    flex-wrap: nowrap; /* Evita que el botón se baje a otra línea */
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 5px 15px;
+    border: 2px solid #e75419;
+    width: 200px; /* Tamaño base más pequeño para dar prioridad al logo */
+    transition: width 0.3s ease;
+}
+
+.search-box:focus-within {
+    width: 250px; /* Solo crece cuando el usuario va a escribir */
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+    font-size: 16px; /* Letra más legible */
+    width: 100%;
+    color: #333;
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    color: #e75419;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+/* Estilo para el mensaje de "No hay coincidencias" */
+.no-results {
+    text-align: center;
+    padding: 40px;
+    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.search-box input:focus {
+    width: 200px; /* Se agranda al hacer clic */
+}
+
+.search-box button:hover {
+    color: #e75419;
+}
+
+/* Grid de Productos */
+.container { padding: 50px 8%; }
+.section-title { text-align: center; font-size: 32px; text-transform: uppercase; margin-bottom: 30px; }
+
+.grid-productos {
+    display: grid;
+    /* Esto crea columnas que se adaptan automáticamente entre 250px y 300px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 30px;           /* Espacio uniforme entre tarjetas */
+    padding: 40px 5%;    /* Margen lateral para que no toquen los bordes */
+    justify-content: center; /* Centra las tarjetas en la pantalla */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;        /* Para que todas midan lo mismo de alto */
+    max-width: 320px;    /* Evita que la tarjeta sea gigante en pantallas grandes */
+    margin: 0 auto;      /* Centra la tarjeta en su celda del grid */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Efecto de elevación al pasar el mouse */
+}
+.card:hover { transform: translateY(-10px); }
+
+
+.card h3 { margin: 15px 0 5px; color: var(--dark-grey); }
+.card .precio { color: var(--veci-orange); font-size: 24px; font-weight: bold; }
+
+.input-cantidad {
+    width: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+/* Contenedor principal del mapa */
+.map-full-width {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.mapa-contenedor {
+    width: 100%;
+    height: 450px; /* Puedes subirlo a 500px si lo quieres más alto */
+    overflow: hidden;
+}
+
+/* El iframe debe ocupar el 100% de su padre */
+.mapa-contenedor iframe {
+    width: 100%;
+    height: 100%;
+    filter: grayscale(0.2); /* Opcional: le da un toque elegante */
+    border-top: 5px solid rgba(231, 84, 25, 0.87); /* Línea naranja superior */
+}
+
+/* Estilos para las redes sociales abajo del mapa */
+.socials-container {
+    background-color: #202124;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.social-icons {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+/* Logo en el Nav */
+.logo { display: flex; align-items: center; gap: 10px; }
+.logo-img { height: 50px; width: auto; border-radius: 50%; }
+
+/* Estilos extra para las categorías */
+.grid-categorias {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.categoria-card {
+    position: relative; /* Para el badge */
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: 0.4s all ease;
+}
+
+.categoria-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 30px rgba(231, 84, 25, 0.2);
+}
+
+.badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--veci-orange);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.categoria-card img {
+    height: 250px; /* Un poco más altas */
+    transition: 0.5s;
+}
+
+.categoria-card:hover img {
+    transform: scale(1.1);
+}
+
+.categoria-card img { width: 100%; height: 200px; object-fit: cover; }
+.categoria-card h3 { padding: 15px; background: rgba(231, 84, 25, 0.87); color: white; margin: 0; }
+/* En style.css para que el logo no se vea extraño */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 60px; /* Tamaño ideal */
+    width: 60px;
+    border-radius: 50%; /* Lo mantiene circular */
+    border: 2px solid rgba(231, 84, 25, 0.87); /* Borde naranja de marca */
+    object-fit: cover;
+}
+
+.logo span {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #202124;
+}
+.category-hero {
+    height: 300px;
+    background-color: rgba(231, 84, 25, 0.87); /* Color de respaldo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.banner-content h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin: 0;
+}
+
+.btn-pedir {
+    background-color: rgba(231, 84, 25, 0.87);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-pedir:hover {
+    background-color: #000;
+}
+/* Contenedor de la cuadrícula de productos */
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px)); /* Máximo 300px por tarjeta */
+    gap: 20px;
+    justify-content: center; /* Centra las tarjetas si hay pocas */
+    padding: 20px;
+}
+
+/* Tarjeta de Producto Individual */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    border: 1px solid #eee;
+    height: 100%; /* Para que todas midan lo mismo */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Imagen del Producto - Aquí controlamos el tamaño gigante */
+.card img { 
+    width: 100%; 
+    height: 200px; /* Altura fija para que todas las tarjetas se alineen */
+    object-fit: contain; /* ¡CAMBIO CLAVE! Muestra el producto completo sin cortarlo */
+    border-radius: 10px; 
+    padding: 15px; /* Da "aire" al producto para que no toque los bordes */
+    background-color: #f9f9f9; /* Fondo suave para resaltar el producto */
+    display: block;
+    margin: 0 auto;
+}
+
+/* Contenido de texto de la tarjeta */
+.card h3 {
+    font-size: 1.2rem;
+    margin: 15px 10px 5px;
+    color: var(--dark-grey);
+    text-transform: uppercase;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #666;
+    padding: 0 10px;
+    flex-grow: 1; /* Empuja el precio y botón hacia abajo */
+}
+
+.precio {
+    font-weight: bold;
+    color: var(--veci-orange);
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+/* Caja de controles (Input y Botón) */
+.order-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #f9f9f9;
+}
+
+.input-cantidad {
+    width: 50px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+/* Banner reducido */
+.category-hero-small {
+    height: 180px; /* Mucho más bajo que el anterior */
+    background-color: var(--veci-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.category-hero-small h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Barra de navegación secundaria */
+.nav-secundario {
+    display: flex;
+    align-items: center;
+    padding: 15px 8%;
+    background: #f4f4f4;
+    gap: 15px;
+}
+
+.btn-volver {
+    background: transparent;
+    border: 2px solid var(--veci-orange);
+    color: var(--veci-orange);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-volver:hover {
+    background: var(--veci-orange);
+    color: white;
+}
+
+.separador { color: #ccc; }
+
+/* Controlar tamaño de tarjetas de productos para que no sean gigantes */
+.grid-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 280px)); /* Tamaño controlado */
+    gap: 20px;
+    justify-content: center;
+}
+/* descuentos  */
+/* Contenedor de la tarjeta para permitir posicionamiento absoluto */
+.card {
+    position: relative; /* Necesario para que el descuento flote sobre la tarjeta */
+}
+
+/* Etiqueta de Descuento Llamativa */
+.promo-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e75419; /* Tu color tomate característico */
+    color: white;
+    padding: 8px 12px;
+    font-weight: 900;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+    transform: rotate(-5deg); /* Un pequeño giro para que se vea más dinámico */
+    animation: pulse 2s infinite; /* Animación para atraer la vista */
+}
+
+/* Texto de oferta debajo del precio */
+.ahorro-texto {
+    color: #28a745; /* Verde para indicar ahorro */
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Animación de pulso */
+@keyframes pulse {
+    0% { transform: rotate(-5deg) scale(1); }
+    50% { transform: rotate(-5deg) scale(1.1); }
+    100% { transform: rotate(-5deg) scale(1); }
+}
+.precio-antes {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.ahorro-texto {
+    color: #28a745; /* Verde éxito */
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: block;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+/* .grid-categorias */
+/* Ajusta el contenedor de las tarjetas de categorías */
+.categorias-grid {
+    display: grid;
+    /* Esto obliga a que las columnas tengan un tamaño mínimo de 250px y máximo de 300px */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px)); 
+    gap: 30px;
+    justify-content: center; /* Centra las tarjetas en la pantalla */
+    padding: 20px;
+}
+/* Estilo para la tarjeta de categoría individual */
+.categoria-card {
+    max-width: 300px; /* Evita que sea muy ancha */
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* Controla la imagen para que no se deforme ni crezca de más */
+.categoria-card img {
+    width: 100%;
+    height: 180px; /* Altura fija para uniformidad */
+    object-fit: cover; /* Ajusta la imagen sin estirarla */
+    display: block;
+}
