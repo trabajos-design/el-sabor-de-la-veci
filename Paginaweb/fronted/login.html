@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingresar | Entrar a El Sabor de la Veci</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <header>
+                <div class="logo-red">🍟 El Sabor de la Veci<span></span></div>
+                <h1>¡Hola de nuevo!</h1>
+                <p>Ingresa tus datos para ordenar</p>
+            </header>
+
+            <form action="../backend/auth.php" method="POST">
+             <div class="input-group">
+                    <label>Correo</label>
+                    <input type="email" name="correo" required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Entrar a El Sabor de la Veci</button>
+            </form>
+
+            <footer class="login-footer">
+                <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+                <a href="index.html" class="btn-outline">Volver al inicio</a>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
